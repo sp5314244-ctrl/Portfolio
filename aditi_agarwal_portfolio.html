@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditi Agarwal — Data Governance Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f0e8;
+    --accent: #c8502a;
+    --accent2: #2a6e8c;
+    --muted: #7a7268;
+    --line: rgba(14,14,14,0.12);
+    --card-bg: #fffdf8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 60px 64px 40px;
+    border-bottom: 1.5px solid var(--ink);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -2px;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .header-right {
+    text-align: right;
+    padding-bottom: 8px;
+  }
+
+  .header-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+    max-width: 220px;
+    margin-left: auto;
+  }
+
+  .contact-links a {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .contact-links a:hover { color: var(--accent); }
+
+  .marquee-strip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 32px;
+  }
+  .marquee-inner span.dot { color: var(--accent); font-size: 18px; vertical-align: middle; padding: 0 8px; }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 0;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .summary-section {
+    padding: 52px 64px 52px;
+    border-right: 1.5px solid var(--ink);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .summary-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #2a2520;
+    font-weight: 300;
+  }
+
+  .highlight-stat {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 28px 0 0;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+    max-width: 80px;
+    line-height: 1.3;
+  }
+
+  .skills-section {
+    padding: 52px 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    background: var(--card-bg);
+    border-radius: 3px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .skill-item:hover {
+    border-color: var(--accent);
+    transform: translateX(4px);
+  }
+  .skill-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--ink);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .skill-icon svg { width: 14px; height: 14px; fill: var(--paper); }
+  .skill-name {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .experience-section {
+    padding: 52px 64px;
+    border-top: 1.5px solid var(--ink);
+    grid-column: 1 / -1;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 8px;
+    border: 1.5px solid var(--ink);
+  }
+
+  .exp-card {
+    padding: 32px 28px;
+    border-right: 1.5px solid var(--ink);
+    position: relative;
+    transition: background 0.25s;
+  }
+  .exp-card:last-child { border-right: none; }
+  .exp-card:hover { background: var(--ink); }
+  .exp-card:hover * { color: var(--paper) !important; }
+  .exp-card:hover .exp-tag { background: var(--accent); color: var(--paper) !important; }
+
+  .exp-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--paper);
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .exp-card.past .exp-tag { background: var(--line); color: var(--muted); }
+  .exp-card:hover.past .exp-tag { background: var(--accent2); color: var(--paper) !important; }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .exp-role {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+  .exp-duties {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .exp-duties li {
+    font-size: 12px;
+    color: #3a352e;
+    line-height: 1.5;
+    padding-left: 14px;
+    position: relative;
+  }
+  .exp-duties li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 1px;
+  }
+
+  .tools-section {
+    padding: 40px 64px;
+    border-top: 1.5px solid var(--ink);
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .tool-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 7px 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--ink);
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .tool-chip:hover { background: var(--ink); color: var(--paper); }
+  .tool-chip.accent { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  .tool-chip.accent2 { background: var(--accent2); color: var(--paper); border-color: var(--accent2); }
+
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1.5px solid var(--ink);
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .edu-section {
+    padding: 40px 64px;
+    border-right: 1.5px solid var(--ink);
+  }
+
+  .edu-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .edu-detail {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-section {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .footer-cta {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  .footer-cta span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.05em;
+    padding: 8px 14px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .footer-links a:hover { background: var(--ink); color: var(--paper); }
+
+  .copyright {
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 768px) {
+    header { grid-template-columns: 1fr; padding: 32px 24px 28px; }
+    .header-right { text-align: left; padding-bottom: 0; }
+    .main-grid { grid-template-columns: 1fr; }
+    .summary-section { padding: 36px 24px; border-right: none; border-bottom: 1.5px solid var(--ink); }
+    .skills-section { padding: 36px 24px; }
+    .experience-section { padding: 36px 24px; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .exp-card { border-right: none; border-bottom: 1.5px solid var(--ink); }
+    .tools-section { padding: 32px 24px; }
+    .bottom-row { grid-template-columns: 1fr; }
+    .edu-section { padding: 32px 24px; border-right: none; border-bottom: 1.5px solid var(--ink); }
+    .footer-section { padding: 32px 24px; }
+    h1 { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-eyebrow">Portfolio · Data & Governance</div>
+    <h1>Aditi<br><span>Agarwal</span></h1>
+  </div>
+  <div class="header-right">
+    <div class="header-role">MDM & Data Governance Analyst · 5+ years enterprise experience</div>
+    <div class="contact-links">
+      <a href="mailto:aditiagarwalddn@gmail.com">aditiagarwalddn@gmail.com</a>
+      <a href="https://linkedin.com/in/aditi-agarwal-b682bb154" target="_blank">linkedin.com/in/aditi-agarwal</a>
+      <a href="tel:+917248083737">+91 72480 83737</a>
+    </div>
+  </div>
+</header>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Data Governance</span><span class="dot">✦</span>
+    <span>Master Data Management</span><span class="dot">✦</span>
+    <span>Informatica C360</span><span class="dot">✦</span>
+    <span>Data Quality</span><span class="dot">✦</span>
+    <span>ETL Pipelines</span><span class="dot">✦</span>
+    <span>SQL & Advanced Excel</span><span class="dot">✦</span>
+    <span>Salesforce CRM</span><span class="dot">✦</span>
+    <span>Oracle DB</span><span class="dot">✦</span>
+    <span>Power BI</span><span class="dot">✦</span>
+    <span>SAP S4</span><span class="dot">✦</span>
+    <span>Data Governance</span><span class="dot">✦</span>
+    <span>Master Data Management</span><span class="dot">✦</span>
+    <span>Informatica C360</span><span class="dot">✦</span>
+    <span>Data Quality</span><span class="dot">✦</span>
+    <span>ETL Pipelines</span><span class="dot">✦</span>
+    <span>SQL & Advanced Excel</span><span class="dot">✦</span>
+    <span>Salesforce CRM</span><span class="dot">✦</span>
+    <span>Oracle DB</span><span class="dot">✦</span>
+    <span>Power BI</span><span class="dot">✦</span>
+    <span>SAP S4</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<div class="main-grid">
+  <div class="summary-section">
+    <div class="section-label">About</div>
+    <p class="summary-text">Creative and collaborative Data Management professional with over 5 years of experience across Data Governance, Data Quality, and Master Data Management. Proven ability to manage enterprise master data workflows across complex, multi-platform environments — ensuring accuracy, compliance, and integrity at scale.</p>
+    <div class="highlight-stat">
+      <span class="stat-number">5+</span>
+      <span class="stat-label">Years Enterprise Experience</span>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <div class="section-label">Core Skills</div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+        <span class="skill-name">Data Governance & Quality</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.35C18 2.53 15.92.5 13.4.5c-1.4 0-2.65.6-3.4 1.5C9.25 1.1 8 .5 6.6.5 4.08.5 2 2.53 2 4.65 2 5.12 2.13 5.56 2.2 6H0v14h24V6h-4z"/></svg></div>
+        <span class="skill-name">Master Data Management (MDM)</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg></div>
+        <span class="skill-name">ETL – Transfer, Validation & Mastering</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg></div>
+        <span class="skill-name">SQL & Advanced Excel</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-7-2l-4-4 1.41-1.41L12 14.17l6.59-6.58L20 9l-8 8z"/></svg></div>
+        <span class="skill-name">UAT Testing & Business Analysis</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+        <span class="skill-name">Data Profiling & Cleansing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="experience-section" style="border-top: 1.5px solid var(--ink);">
+  <div class="section-label">Work Experience</div>
+  <div class="exp-grid">
+    <div class="exp-card current">
+      <span class="exp-tag">Current</span>
+      <div class="exp-company">Aveva<br><span style="font-size:14px; color:var(--muted); font-family:'Instrument Sans',sans-serif;">(Schneider Electric)</span></div>
+      <div class="exp-role">MDM & Data Quality Analyst</div>
+      <div class="exp-period">Nov 2024 – Present</div>
+      <ul class="exp-duties">
+        <li>Manage data governance including monitoring, validation & quality checks across enterprise MDM systems</li>
+        <li>Execute MDM processes: match & merge, account merging, reactivation/deactivation, quality rejections</li>
+        <li>Maintain customer master data using Informatica C360, Salesforce & Oracle DB; support migrations</li>
+        <li>Assist Business & Product Owners in UAT; validate data accuracy and completeness post-deployment</li>
+      </ul>
+    </div>
+    <div class="exp-card past">
+      <span class="exp-tag">Previous</span>
+      <div class="exp-company">Deloitte</div>
+      <div class="exp-role">Data Management Analyst</div>
+      <div class="exp-period">Mar 2022 – Nov 2024</div>
+      <ul class="exp-duties">
+        <li>End-to-end data management: research requests, profiling, segregation, monitoring & quality assurance</li>
+        <li>Operated Salesforce & Informatica MDM for data mastering, hierarchy mapping & client master data</li>
+        <li>Analysed large datasets using SQL & Excel; applied quality rules across platforms</li>
+        <li>Spot Award FY23 & FY24 for outstanding performance exceeding quality benchmarks</li>
+      </ul>
+    </div>
+    <div class="exp-card past">
+      <span class="exp-tag">Earlier</span>
+      <div class="exp-company">Moglix Business</div>
+      <div class="exp-role">Enterprise Marketing Executive</div>
+      <div class="exp-period">Aug 2020 – Mar 2022</div>
+      <ul class="exp-duties">
+        <li>Developed presentations, pitch decks, one-sheets & case studies for enterprise B2B sales</li>
+        <li>Conducted market & industry research to support strategic decision-making</li>
+        <li>Managed direct B2B communication with supply chain professionals, Directors & VPs</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="tools-section">
+  <div class="section-label">Tools & Platforms</div>
+  <div class="tools-row">
+    <span class="tool-chip accent">Informatica C360</span>
+    <span class="tool-chip accent2">Salesforce CRM</span>
+    <span class="tool-chip">Oracle DB</span>
+    <span class="tool-chip">SAP S4</span>
+    <span class="tool-chip">Power BI</span>
+    <span class="tool-chip">ServiceNow</span>
+    <span class="tool-chip">D&B Hoovers</span>
+    <span class="tool-chip">Pitchbook</span>
+    <span class="tool-chip">Refinitiv</span>
+    <span class="tool-chip">SQL</span>
+    <span class="tool-chip">Advanced Excel</span>
+    <span class="tool-chip">Global Data</span>
+  </div>
+</div>
+
+<div class="bottom-row">
+  <div class="edu-section">
+    <div class="section-label">Education</div>
+    <div class="edu-item">
+      <div class="edu-school">University of Petroleum & Energy Studies</div>
+      <div class="edu-detail">B.Tech — Computer Science · Dehradun · 2015–2019</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-school">Doon Presidency School</div>
+      <div class="edu-detail">ICSE Senior Secondary · 2015</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-school">Doon Presidency School</div>
+      <div class="edu-detail">ICSE High School · 2013</div>
+    </div>
+  </div>
+
+  <div class="footer-section">
+    <div>
+      <div class="footer-cta">Let's connect &<br><span>work together.</span></div>
+      <div class="footer-links">
+        <a href="mailto:aditiagarwalddn@gmail.com">✉ aditiagarwalddn@gmail.com</a>
+        <a href="https://linkedin.com/in/aditi-agarwal-b682bb154" target="_blank">in LinkedIn Profile</a>
+        <a href="tel:+917248083737">✆ +91 72480 83737</a>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Aditi Agarwal · Data Governance & MDM Specialist</div>
+  </div>
+</div>
+
+</body>
+</html>
